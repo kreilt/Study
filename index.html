@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ЛР-трекер · 23-ПО-2</title>
+<meta name="theme-color" content="#16242E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ЛР">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF0; --card:#FFFFFF; --ink:#16242E; --ink-2:#4A606E; --ink-3:#7C8F9B;
+  --line:#CBD6DD; --line-soft:#DFE6EA;
+  --blue:#2B6C8F; --blue-soft:#DCEAF1;
+  --hot:#B3312C; --hot-soft:#F6DFDE;
+  --warm:#9A6A05; --warm-soft:#F7E9CC;
+  --done:#2F7150; --done-soft:#DCEEE3;
+  --shadow:0 1px 0 rgba(22,36,46,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101820; --card:#18232C; --ink:#E6EDF2; --ink-2:#A6B8C4; --ink-3:#7C8F9B;
+    --line:#2B3A45; --line-soft:#223039; --blue:#6FB4D6; --blue-soft:#1C3441;
+    --hot:#F08B84; --hot-soft:#3A2220; --warm:#E0B45F; --warm-soft:#332915;
+    --done:#7FCFA3; --done-soft:#173024; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101820; --card:#18232C; --ink:#E6EDF2; --ink-2:#A6B8C4; --ink-3:#7C8F9B;
+  --line:#2B3A45; --line-soft:#223039; --blue:#6FB4D6; --blue-soft:#1C3441;
+  --hot:#F08B84; --hot-soft:#3A2220; --warm:#E0B45F; --warm-soft:#332915;
+  --done:#7FCFA3; --done-soft:#173024; --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Golos Text","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  font-size:15px; line-height:1.45; -webkit-text-size-adjust:100%; font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:720px;margin:0 auto;padding:14px 12px 64px}
+h1{font-size:19px;font-weight:700;margin:0;letter-spacing:-.01em}
+.sub{color:var(--ink-3);font-size:13px;margin-top:2px}
+.hot{color:var(--hot)} .warm{color:var(--warm)} .far{color:var(--ink-3)} .ok{color:var(--done)}
+
+/* вкладки */
+.tabs{display:flex;gap:4px;margin:12px 0 12px;background:var(--line-soft);padding:3px;border-radius:10px}
+.tabs button{flex:1;font:inherit;font-size:13.5px;font-weight:500;padding:7px 8px;border:none;border-radius:8px;
+  background:transparent;color:var(--ink-2);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--card);color:var(--ink);font-weight:600;box-shadow:var(--shadow)}
+
+/* линейка семестра */
+.ruler{background:var(--card);border:1px solid var(--line-soft);border-radius:12px;padding:12px 12px 8px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ruler-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px}
+.now{font-weight:700;font-size:16px}
+.now span{color:var(--ink-3);font-weight:500;font-size:13px}
+.bars{display:flex;gap:3px;align-items:flex-end;height:38px}
+.wk{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:3px}
+.wk i{display:block;height:5px;border-radius:2px;background:var(--line);opacity:.55}
+.wk .bar{height:12px;border-radius:3px;background:var(--line-soft);border:1px solid var(--line)}
+.wk.cur .bar{background:var(--blue);border-color:var(--blue);height:20px}
+.wk i.d-hot{background:var(--hot);opacity:1}
+.wk i.d-warm{background:var(--warm);opacity:1}
+.wk i.d-done{background:var(--done);opacity:1}
+.wk i.d-far{background:var(--ink-3);opacity:.6}
+.wknums{display:flex;gap:3px;margin-top:5px}
+.wknums div{flex:1;text-align:center;font-size:10px;color:var(--ink-3)}
+.wknums div.cur{color:var(--blue);font-weight:700}
+
+/* список предметов */
+.subjects{background:var(--card);border:1px solid var(--line-soft);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.srow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;width:100%;text-align:left;
+  font:inherit;color:inherit;background:none;border:none;border-top:1px solid var(--line-soft);padding:11px 12px;cursor:pointer}
+.srow:first-child{border-top:none}
+.srow .sname{font-size:15px;font-weight:600}
+.srow .smeta{font-size:12px;color:var(--ink-3);margin-top:2px}
+.srow.off .sname,.srow.off .smeta{color:var(--ink-3);font-weight:500}
+.dots{display:flex;gap:3px}
+.dots i{width:9px;height:9px;border-radius:50%;background:transparent;border:1.5px solid var(--line);display:block}
+.dots i.u-hot{border-color:var(--hot)} .dots i.u-warm{border-color:var(--warm)} .dots i.u-far{border-color:var(--ink-3)}
+.dots i.s-none{border-style:dashed}
+.dots i.s-todo.u-hot{background:var(--hot)} .dots i.s-todo.u-warm{background:var(--warm)} .dots i.s-todo.u-far{background:var(--ink-3)}
+.dots i.s-ready{border-color:var(--done)}
+.dots i.s-done{border-color:var(--done);background:var(--done)}
+.chev{color:var(--ink-3);font-size:18px;line-height:1}
+.badge{display:inline-block;font-size:11px;font-weight:600;color:var(--ink-3);border:1px solid var(--line);
+  border-radius:5px;padding:0 5px;margin-left:6px;vertical-align:2px}
+
+/* детали предмета */
+.back{font:inherit;font-size:13px;color:var(--blue);background:none;border:none;padding:0 0 10px;cursor:pointer}
+.subj{background:var(--card);border:1px solid var(--line-soft);border-radius:12px;margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow)}
+.shead{padding:11px 12px 9px;border-bottom:1px solid var(--line-soft)}
+.shead .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.sname{font-weight:600;font-size:15.5px}
+.scount{font-size:12px;color:var(--ink-3);white-space:nowrap}
+.smeta{font-size:12px;color:var(--ink-3);margin-top:3px}
+.ssend{font-size:12px;color:var(--ink-2);margin-top:5px;border-left:2px solid var(--blue);padding-left:8px}
+
+/* строка работы */
+.lab{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:9px 12px;border-top:1px solid var(--line-soft)}
+.lab:first-of-type{border-top:none}
+.st{width:26px;height:26px;border-radius:50%;border:1.5px dashed var(--line);background:transparent;cursor:pointer;
+  padding:0;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--ink-3);flex:0 0 auto}
+.st.u-hot{border-color:var(--hot);color:var(--hot)}
+.st.u-warm{border-color:var(--warm);color:var(--warm)}
+.st.u-far{border-color:var(--ink-3);color:var(--ink-3)}
+.st.todo{border-style:solid;border-width:2px}
+.st.todo.u-hot{background:var(--hot-soft)}
+.st.todo.u-warm{background:var(--warm-soft)}
+.st.ready{border-style:solid;border-width:2px;border-color:var(--done);color:var(--done);background:transparent}
+.st.done{border-style:solid;border-color:var(--done);background:var(--done);color:#fff}
+.st.rework{border-style:solid;border-width:2px;border-color:var(--hot);background:var(--hot-soft);color:var(--hot)}
+.mini{font:inherit;font-size:11px;padding:1px 6px;margin-top:3px;border:1px solid var(--line);border-radius:7px;
+  background:transparent;color:var(--ink-3);cursor:pointer}
+.pick{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 0 4px;
+  border-top:1px dashed var(--line-soft);margin-top:6px}
+.pick .q2{font-size:12px;color:var(--ink-3);width:100%}
+.pick button{font:inherit;font-size:12.5px;padding:5px 10px;border-radius:8px;border:1px solid var(--line);
+  background:transparent;color:var(--ink-2);cursor:pointer}
+.pick button.on{border-color:var(--blue);color:var(--blue);font-weight:600}
+.pick button.warnbtn{border-color:var(--hot);color:var(--hot)}
+.lmain{text-align:left;background:none;border:none;padding:0;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.lname{font-size:14.5px;font-weight:500}
+.lname .pre{color:var(--ink-3);font-weight:600}
+.lab.done .lname{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--line)}
+.lmeta{font-size:12px;color:var(--ink-3);margin-top:1px}
+.ldl{text-align:right;font-size:12px;line-height:1.25;white-space:nowrap}
+.ldl b{display:block;font-size:13px;font-weight:600}
+.det{grid-column:1/-1;padding:2px 0 8px;border-top:1px dashed var(--line-soft);margin-top:4px}
+.det p{margin:7px 0;font-size:13px;color:var(--ink-2)}
+.det ul{margin:6px 0;padding-left:18px;font-size:13px;color:var(--ink-2)}
+.det li{margin:2px 0}
+.fields{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;align-items:center}
+.fields label{font-size:12px;color:var(--ink-3)}
+input[type="date"],input[type="text"]{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);
+  border-radius:8px;background:var(--paper);color:var(--ink);max-width:100%}
+input[type="text"]{flex:1;min-width:140px}
+.addrow{display:flex;gap:6px;padding:9px 12px;border-top:1px solid var(--line-soft)}
+.btn{font:inherit;font-size:13px;padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer}
+.btn.pri{border-color:var(--blue);color:var(--blue)}
+.btn.ghost{border:none;color:var(--ink-3)}
+.q{display:inline-block;font-size:11px;color:var(--warm);border:1px solid var(--warm);border-radius:5px;padding:0 4px;margin-left:5px;vertical-align:1px;font-weight:600}
+
+/* сроки */
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--ink-2);font:inherit;font-size:13px;
+  padding:5px 11px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.mhead{font-size:12px;font-weight:600;color:var(--ink-3);margin:14px 0 6px 4px}
+.empty{background:var(--card);border:1px solid var(--line-soft);border-radius:12px;padding:16px 12px;text-align:center;color:var(--ink-3);font-size:13.5px}
+.zoom{display:flex;gap:4px;align-items:center}
+.zoom .cal{width:38px;height:38px;margin-right:14px;border-radius:10px;display:grid;place-items:center}
+.zoom .cal.on{border-color:var(--blue);color:var(--blue)}
+.zoom button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:transparent;
+  color:var(--ink-2);font:inherit;font-size:15px;line-height:1;cursor:pointer}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ldl{cursor:pointer}
+body.w .wrap{max-width:420px;padding:10px}
+body.w .head,body.w .tabs,body.w .foot{display:none}
+.wcard{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:12px 13px}
+.whead{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-3);margin-bottom:6px}
+.wrow{display:grid;grid-template-columns:auto 1fr;gap:3px 9px;padding:7px 0;border-top:1px solid var(--line-soft)}
+.wrow b{font-size:15px;font-weight:700}
+.wrow span{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wrow i{grid-column:1/-1;font-size:11.5px;font-style:normal}
+.wopen{display:block;margin-top:9px;font-size:12px;color:var(--blue);text-align:center;cursor:pointer}
+.foot{margin-top:18px;font-size:12px;color:var(--ink-3);text-align:center}
+.foot b{font-weight:600;color:var(--ink-2)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.st{transition:background .12s ease,border-color .12s ease}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div>
+      <h1>Что и когда сдавать</h1>
+      <div class="sub">Погодин Олег · 23-ПО-2 · план: всё закрыть до конца ноября</div>
+    </div>
+    <div class="zoom">
+      <button class="cal" id="calbtn" data-tab="cal" aria-label="календарь" title="Календарь"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 2.8v4M16 2.8v4M3.5 10h17"/></svg></button>
+      <button data-zoom="-1" aria-label="мельче">−</button><button data-zoom="1" aria-label="крупнее">+</button>
+    </div>
+  </header>
+  <nav class="tabs" id="tabs">
+    <button data-tab="subjects" aria-pressed="true">Предметы</button>
+    <button data-tab="deadlines" aria-pressed="false">Сроки</button>
+  </nav>
+  <div id="app"></div>
+  <div class="foot" id="net"></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+"use strict";
+
+/* ===== Недели семестра: 1-я неделя — с 1 сентября 2026 (вт) ===== */
+const W1 = new Date(2026, 7, 31);           // понедельник 1-й недели
+const DAY = 86400000, TOTAL_WEEKS = 17;
+const today = (() => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); })();
+const MONTHS = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
+const MONTHS_FULL = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+const DOW = ["вс","пн","вт","ср","чт","пт","сб"];
+
+const weekOf = d => Math.floor((d - W1) / (7 * DAY)) + 1;
+const parse = s => { if (!s) return null; const [y,m,dd] = s.split("-").map(Number); return new Date(y, m-1, dd); };
+const fmt = d => d ? `${d.getDate()} ${MONTHS[d.getMonth()]}` : "";
+const fmtFull = d => d ? `${DOW[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}` : "";
+const daysLeft = d => Math.round((d - today) / DAY);
+const CUR_WEEK = Math.min(Math.max(weekOf(today), 1), TOTAL_WEEKS);
+
+function leftText(n) {
+  if (n < 0) return `просрочено на ${Math.abs(n)} дн.`;
+  if (n === 0) return "сегодня";
+  if (n === 1) return "завтра";
+  const t = n % 10, h = n % 100;
+  const w = (t === 1 && h !== 11) ? "день" : (t >= 2 && t <= 4 && (h < 12 || h > 14)) ? "дня" : "дней";
+  return `${n} ${w}`;
+}
+function urgency(d, status, repeat) {
+  if (status === "done") return "ok";
+  if (!d) return "far";
+  const n = daysLeft(d);
+  if (n <= (repeat ? 2 : 14)) return "hot";
+  if (n <= (repeat ? 7 : 30)) return "warm";
+  return "far";
+}
+
+/* ===== Данные ===== */
+const DATA = [
+  {
+    id:"opas", name:"Организация и проектирование АС", short:"ОПАС", teacher:"Мисевич П.В.",
+    meta:"Лаб — пн 13:40, ауд. 5422 (2 пгр) · лекция — чт 13:40, ауд. 1353",
+    send:"Отчёты сдаются преподавателю. Индивидуальное задание нужно согласовать лично. Пароль к ВМ — 777.",
+    labs:[
+      { id:"opas1", n:"ЛР1", title:"Нотация EPC", plan:"2026-09-28", sure:true, status:"todo",
+        why:"его письмо: к началу 5 недели нужно сдать отчёт по ЛР EPC. 5 неделя начинается 28 сентября.",
+        det:["Индивидуальное задание: либо выдаёт преподаватель, либо адаптирует тему ВКР. Крайний срок согласования был в чт 17 сентября — если не согласовал, это первое, что нужно закрыть.","Материалы для выполнения ЛР1 он уже присылал на почту группы."] },
+      { id:"opas2", n:"ЛР2", title:"Нотация DFD", plan:"2026-10-26", sure:false, status:"none",
+        why:"мой план: цикл 4 недели, как у ЛР1 → 9 неделя. Сроков он не называл." },
+      { id:"opas3", n:"ЛР3", title:"Нотация IDEF0", plan:"2026-11-23", sure:false, status:"none",
+        why:"мой план: 13 неделя. Сроков он не называл." }
+    ]
+  },
+  {
+    id:"kg", name:"Компьютерная графика", short:"КГ", teacher:"Шапкина Ирина",
+    meta:"Лаб — ср 11:35, ауд. 5422 (2 пгр), недели 5, 9, 13, 17 · лекция — вт 13:40, ауд. 1329",
+    send:"На shapkina.ie@nntu.ru: .exe + отчёт. В теме письма — группа, ФИО, номер ЛР и вариант. Отметка «зачтено» — в гугл-таблице, там же твой вариант.",
+    note:"Шапкина назвала ровно один срок: все 3 ЛР должны быть зачтены до 16 недели включительно, то есть до 19–20 декабря. Даты ниже — мой план: закрыть всё к началу декабря. Она проверяет неизвестно сколько, может развернуть на доработку, а в ноябре–декабре к ней придёт сдаваться весь поток — чем раньше отправишь, тем больше остаётся времени на переделку.",
+    labs:[
+      { id:"kg1", n:"ЛР1", title:"Задание по варианту", plan:"2026-10-07", hard:"2026-12-19", sure:false, status:"todo",
+        why:"жёсткий срок один на все три — 19 декабря. 7 октября — мой план: сдать первой волной, пока очереди нет.",
+        det:["Вариант и задание — в файле «ЗадачиКГ 2025» из архива КГ.rar.",
+             "Требования: графический интерфейс, инструкция внутри программы, два режима (рандомный по заданию и «рисование»), удаление элементов и массовый сброс.",
+             "Отчёт: титульный лист, вариант и задача, теория, средства разработки, модули программы, скриншоты, вывод."] },
+      { id:"kg2", n:"ЛР2", title:"Задание по варианту", plan:"2026-11-11", hard:"2026-12-19", sure:false, status:"todo",
+        why:"мой план — середина ноября, чтобы между работами оставался зазор на замечания." },
+      { id:"kg3", n:"ЛР3", title:"Задание по варианту", plan:"2026-11-25", hard:"2026-12-19", sure:false, status:"todo",
+        why:"мой план — 25 ноября: три недели до жёсткого срока на проверку и переделку, если развернёт." }
+    ]
+  },
+  {
+    id:"web", name:"Разработка клиентских web-приложений", short:"Веб", teacher:"Яшнов М.Д.",
+    meta:"Лаб — сб 9:45, ауд. 5426 (1 пгр), недели 2, 6, 10, 14 · лекция — ср 17:10, ауд. 1329",
+    send:"Отчёты на officialmaximka@gmail.com. На защите спрашивает теорию по React.",
+    note:"Всего будет 2 или 3 ЛР.",
+    labs:[
+      { id:"web1", n:"ЛР1", title:"React-интерфейс · вариант 2 «Products»", plan:"2026-10-10", sure:false, status:"todo",
+        why:"мой план — ближайшая лабораторная суббота, 6 неделя. Срока он не называл.",
+        det:["Вариант = номер в списке группы % 10. Ты 12-й → 12 % 10 = 2 → Products (по данным dummyjson.com).",
+             "Нужно: отображение данных по теме + добавление, удаление и редактирование записей прямо на странице. React, желательно TypeScript. Реальный API дёргать не обязательно.",
+             "Отчёт: титульник, цель, ссылка на репозиторий, описание проекта, скриншоты, вывод.",
+             "Вопросы на защите: компоненты (функциональные/классовые, одностороннее связывание), props, key, условный рендеринг, JSX, VDOM, состояние и хуки (useState, useEffect, useRef, кастомные)."] },
+      { id:"web2", n:"ЛР2", title:"—", plan:"2026-11-07", sure:false, status:"none", why:"задание не выдано; суббота 10 недели — мой план." },
+      { id:"web3", n:"ЛР3", title:"если третья вообще будет", plan:"2026-11-28", sure:false, status:"none", why:"всего будет 2 или 3 ЛР — третья под вопросом. Лабораторная суббота 5 декабря, готовность — к концу ноября." }
+    ]
+  },
+  {
+    id:"ui", name:"UI-дизайн", short:"UI", teacher:"Анисимова Е.С.",
+    meta:"Лаб — ср 9:45, ауд. 5412 (2 пгр), недели 3, 7, 11, 15 · лекция — чт 9:45, ауд. 1353",
+    send:"Презентации и сопроводительные записки — в общую папку Google Drive. Ведомость: Доклад 1, Доклад 2, ЛР1–ЛР3, зачёт. Контакты: ka3na.an@yandex, 8 905 867-99-00.",
+    note:"Доклады идут на первых двух лекциях после входной: 24 сентября и 8 октября (лекции по чётным неделям, чт 9:45, ауд. 1353). В письме Анисимовой лекции указаны как zoom по чётным средам 18:15 — на день раньше, поэтому в трекере стоят 23 сентября и 7 октября. Лабы идут примерно до 15 недели, крайний срок для зачёта — конец 16-й.",
+    labs:[
+      { id:"ui_d1", n:"Доклад 1", title:"Тема из списка", plan:"2026-09-23", sure:true, status:"todo",
+        why:"первая содержательная лекция после входной — четверг 24 сентября, 4 неделя. Дату в трекере поставил на день раньше: если лекция идёт в zoom по чётной среде, это 23-е.",
+        det:["По расписанию: чт 24 сентября, 9:45, ауд. 1353. По письму Анисимовой: zoom, чётная среда 18:15 — тогда 23 сентября. Готовность к вечеру вторника закрывает оба варианта.",
+             "Темы докладов — по ссылке на Яндекс.Диск из письма.","Презентация + сопроводительная записка загружаются в папку Google Drive."] },
+      { id:"ui_d2", n:"Доклад 2", title:"Тема из списка", plan:"2026-10-07", sure:true, status:"todo",
+        why:"вторая лекция — четверг 8 октября, 6 неделя. В трекере на день раньше, на случай zoom-среды 7 октября." },
+      { id:"ui1", n:"ЛР1", title:"UX-исследование фрагмента продукта ВКР", plan:"2026-10-14", hard:"2026-12-19", sure:false, status:"todo",
+        why:"мой план — ближайшая лаба, среда 7 недели. Крайний срок по предмету — конец 16 недели.",
+        det:["Этап 1: обоснование выбора фрагмента продукта (5–7 предложений).",
+             "Этап 2: конкурентный анализ 3–5 продуктов по 1–2 сквозным сценариям, оценка по 10 эвристикам Нильсена (0–4) таблицей, три списка выводов со скриншотами.",
+             "Этап 3: 5–7 глубинных интервью или анкета минимум на 15 человек, 3–5 инсайтов, персона, CJM, 2–3 pain points.",
+             "Этап 4: гипотезы «если X, то Y, потому что Z» (минимум 3 опираются на конкурентный анализ) и wireframe-эскизы 2–3 экранов."] },
+      { id:"ui2", n:"ЛР2", title:"—", plan:"2026-11-11", hard:"2026-12-19", sure:false, status:"none", why:"задание не выдано; среда 11 недели — мой план." },
+      { id:"ui3", n:"ЛР3", title:"—", plan:"2026-11-25", hard:"2026-12-19", sure:false, status:"none", why:"задание не выдано. Лаба по расписанию только 9 декабря, но быть готовым — к концу ноября." }
+    ]
+  },
+  {
+    id:"zi", name:"Защита информации", short:"ЗИ", teacher:"Жуков М.С.",
+    meta:"Лаб — ср 13:40, ауд. 4201 (1 пгр), недели 3, 7, 11, 15 · лекция — пт 17:10, ауд. 1247",
+    send:"Сдача на парах. Код на Go, отчёты — в Word.",
+    note:"Всего 4 ЛР, и все нужно закрыть за октябрь и ноябрь — край 30 ноября. Даты ниже — мой план по твоим лабам в 7, 11 и 13 неделях.",
+    labs:[
+      { id:"zi1", n:"ЛР1", title:"Исторические шифры · вариант 1.3 «двойной квадрат Уитстона»", plan:"2026-09-16", sure:true, status:"ready", why:"лаба 3 недели — но сдать ещё нужно." },
+      { id:"zi2", n:"ЛР2", title:"DES · вариант 2.3 «обратная связь по шифру» (CFB)", plan:"2026-10-14", hard:"2026-11-30", sure:false, status:"todo", why:"лаба 7 недели. Крайний срок по предмету — конец ноября." },
+      { id:"zi3", n:"ЛР3", title:"«Кузнечик», ГОСТ Р 34.12-2015", plan:"2026-11-11", hard:"2026-11-30", sure:false, status:"todo", why:"лаба 11 недели." },
+      { id:"zi4", n:"ЛР4", title:"RSA и электронная подпись", plan:"2026-11-25", hard:"2026-11-30", sure:false, status:"todo", why:"последняя среда ноября — чтобы уложиться в октябрь–ноябрь." }
+    ]
+  },
+  {
+    id:"isrsu", name:"Инструментальные средства разработки СУ", short:"ИСРСУ", teacher:"Кулясов П.С.",
+    meta:"Лаб — вт 9:45, ауд. 5412 (1 пгр), недели 3, 7, 11, 15 · лекция — чт 11:35 · практика — вт 15:25, ауд. 3208 (чётные)",
+    send:"",
+    note:"3 лабораторные и курсовая. Заданий пока не было, даты ниже поставлены по лабораторным вторникам — как выдаст, поправим.",
+    labs:[
+      { id:"isrsu1", n:"ЛР1", title:"—", plan:"2026-10-13", sure:false, status:"none", why:"задание не выдано; вторник 7 недели." },
+      { id:"isrsu2", n:"ЛР2", title:"—", plan:"2026-11-10", sure:false, status:"none", why:"задание не выдано; вторник 11 недели." },
+      { id:"isrsu3", n:"ЛР3", title:"—", plan:"2026-11-24", sure:false, status:"none", why:"задание не выдано. Последняя лаба по расписанию 8 декабря, готовность — к 24 ноября." },
+      { id:"isrsu_kr", n:"Курсовая", title:"—", plan:"2026-11-30", sure:false, status:"none", why:"срок не назван, дату поставил я. Уточнить у Кулясова тему и когда защита — курсач лучше не тащить в сессию." }
+    ]
+  },
+  {
+    id:"nir", name:"НИР — диплом", short:"НИР", teacher:"научный руководитель",
+    meta:"Расписания нет, всё по договорённости",
+    send:"",
+    note:"Сроки здесь твои собственные — это ритм, чтобы диплом не всплыл в мае одним куском. Плюс ею же закрывается курсовая у Мишанова, так что вес у неё вполне зачётный уже сейчас.",
+    labs:[ { id:"nir_call", n:"Созвон с научруком", title:"раз в две недели, день любой", plan:"2026-09-27", repeat:14, sure:false, status:"todo",
+        why:"это твой ритм, а не его дедлайн. В трекере стоит конец окна: до этой даты надо созвониться, день ловите как получится.",
+        det:["Нажми ↻, когда созвонились — окно сдвинется на две недели вперёд от этого дня. Поэтому неважно, попадёт созвон на среду, пятницу или субботу: следующий отсчитывается от последнего состоявшегося.",
+             "Первое окно — до воскресенья 27 сентября.",
+             "На первый созвон стоит взять два вопроса по курсачу Мишанова: нужна ли отдельная бумага, чтобы он закрылся НИРом, и к какому сроку."] } ]
+  },
+  {
+    id:"povs", name:"Программное обеспечение вычислительных сетей", short:"ПОВС", teacher:"Кузнецова Е.В.",
+    badge:"освобождён", meta:"Лаб — пт 9:45, ауд. 5426 (1 пгр) · лекция — чт 15:25, ауд. 1353", send:"", labs:[]
+  },
+  {
+    id:"sos", name:"Сервис-ориентированные системы", short:"СОС", teacher:"Мишанов Ф.А.",
+    badge:"освобождён от лаб", meta:"Лаб — пт 13:40, ауд. 5412 · лекция — пн 8:00, ауд. 1329", send:"",
+    note:"От лабораторных освобождён, остаётся курсовая — и она идёт за счёт НИР.",
+    labs:[ { id:"sos_kr", n:"Курсовая", title:"закрывается за счёт НИР", plan:"2026-11-30", sure:false, status:"todo",
+        why:"дату поставил я. Реально зависит от того, когда будет готова НИР — и от того, что скажет Мишанов про оформление." } ]
+  }
+];
+
+/* ===== Состояние ===== */
+const LS = "lr-tracker-v1";
+let state = { status:{}, date:{}, note:{}, extra:{}, last:{}, count:{} };
+let dbDoc = null, saveTimer = null;
+let tab = "subjects", prevTab = "subjects", openSubject = null, filter = "all";
+let widgetMode = false;
+try { widgetMode = localStorage.getItem("lr-widget") === "1" || location.hash === "#w"; } catch(e){ widgetMode = location.hash === "#w"; }
+function setWidget(on){
+  widgetMode = on; openSubject = null; picker = null;
+  if (typeof syncDepth === "function") syncDepth();
+  try { localStorage.setItem("lr-widget", on ? "1" : "0"); } catch(e){}
+  document.body.classList.toggle("w", on);
+  window.scrollTo(0,0); paint();
+}
+let zoom = 1;
+try { zoom = parseFloat(localStorage.getItem("lr-zoom")) || 1; } catch(e){}
+function applyZoom(){ document.documentElement.style.zoom = String(zoom); }
+const openIds = new Set();
+
+const STATES = ["none","todo","ready","done","rework"];
+const MARK = { none:"", todo:"", ready:"✓", done:"✓", rework:"↩" };
+const LABEL = { none:"не выдано", todo:"не готова", ready:"готова", done:"сдана", rework:"на доработке" };
+let picker = null;   // { id, mode: "states" | "rework" | "call" }
+const labList = s => (s.labs || []).concat(state.extra[s.id] || []);
+const statusOf = l => state.status[l.id] || l.status || "none";
+const dateOf = l => {
+  const d = parse(state.date[l.id] || l.plan || "");
+  if (!d || !l.repeat) return d;
+  let t = d.getTime();                      // повторяющееся — показываем ближайшую дату
+  while (t < today.getTime()) t += l.repeat * DAY;
+  return new Date(t);
+};
+const urg = l => urgency(dateOf(l), statusOf(l), l.repeat);
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c]));
+
+function loadLocal(){ try{ const r = localStorage.getItem(LS); if (r) state = Object.assign(state, JSON.parse(r)); }catch(e){} migrate(); }
+function migrate(){ // раньше "done" означало «готова»
+  if (!state.count) state.count = {};
+  if (state.v === 2) return;
+  Object.keys(state.status || {}).forEach(k => { if (state.status[k] === "done") state.status[k] = "ready"; });
+  state.v = 2;
+}
+function saveLocal(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e){} }
+let dirty = false, lsOK = true;
+try { localStorage.setItem("lr-test","1"); localStorage.removeItem("lr-test"); } catch(e){ lsOK = false; }
+function netNote(){
+  const el = document.getElementById("net");
+  if (!el) return;
+  if (!lsOK){ el.textContent = "Браузер не даёт этой копии сохранять отметки — они пропадут после закрытия страницы."; el.style.color = "var(--hot)"; return; }
+  if (!navigator.onLine) el.textContent = "Сети нет — отметки сохраняются на телефоне и уедут в облако, когда связь вернётся.";
+  else el.textContent = (dirty && dbDoc) ? "Синхронизирую…" : "";
+}
+function push(){
+  if (!dbDoc){ dirty = true; netNote(); return; }
+  dbDoc.set({ ...state, updatedAt:new Date().toISOString() })
+    .then(() => { dirty = false; netNote(); })
+    .catch(() => { dirty = true; netNote(); });
+}
+function save(){
+  saveLocal(); dirty = true; netNote();
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(push, 400);
+}
+window.addEventListener("online", () => { netNote(); if (dirty) push(); });
+window.addEventListener("offline", netNote);
+
+/* ===== Куски разметки ===== */
+function rulerHTML(){
+  const byWeek = {};
+  DATA.forEach(s => labList(s).forEach(l => {
+    const d = dateOf(l); if (!d) return;
+    const w = weekOf(d); if (w < 1 || w > TOTAL_WEEKS) return;
+    const u = urg(l);
+    (byWeek[w] = byWeek[w] || []).push(u === "ok" ? "done" : u);
+  }));
+  let bars = "", nums = "";
+  for (let w = 1; w <= TOTAL_WEEKS; w++){
+    const marks = (byWeek[w] || []).slice(0,3).map(u => `<i class="d-${u}"></i>`).join("");
+    bars += `<div class="wk ${w === CUR_WEEK ? "cur" : ""}" title="${w} неделя">${marks}<span class="bar"></span></div>`;
+    nums += `<div class="${w === CUR_WEEK ? "cur" : ""}">${w % 2 === 1 || w === CUR_WEEK ? w : ""}</div>`;
+  }
+  let done = 0, ready = 0, total = 0;
+  DATA.forEach(s => labList(s).forEach(l => { total++; const st = statusOf(l); if (st === "done") done++; else if (st === "ready") ready++; }));
+  return `<section class="ruler">
+    <div class="ruler-top">
+      <div class="now">${CUR_WEEK}-я неделя <span>· ${CUR_WEEK % 2 ? "нечётная" : "чётная"} · ${fmtFull(today)}</span></div>
+      <div class="sub">сдано ${done} из ${total}${ready ? ` · готово ${ready}` : ""}</div>
+    </div>
+    <div class="bars">${bars}</div><div class="wknums">${nums}</div></section>`;
+}
+
+function labRowHTML(s, l, showSubject){
+  const st = statusOf(l), d = dateOf(l), u = urg(l);
+  const hard = l.hard ? parse(l.hard) : null;
+  const uu = st === "done" ? "ok" : (st === "rework" ? "hot" : u);
+  const stCls = st + " u-" + uu;
+  const meta = [ l.repeat ? `каждые ${l.repeat / 7} недели${state.count[l.id] ? `, уже ${state.count[l.id]}` : ""}` : "", d ? `${weekOf(d)} неделя` : "", hard ? `крайний ${fmt(hard)}` : "",
+                 (l.sure === false && d && !hard) ? "дату поставил я" : "" ].filter(Boolean).join(" · ");
+  return `<div class="lab ${st}">
+    <button class="st ${stCls}" data-open="${l.id}" aria-label="подробности, статус: ${LABEL[st]}" title="подробности"></button>
+    <button class="lmain" data-cycle="${l.id}">
+      <div class="lname">${showSubject ? `<span class="pre">${esc(s.short)} · </span>` : ""}${esc(l.n)}${l.title && !l.title.startsWith("—") ? " · " + esc(l.title) : ""}${(l.sure === false && st !== "none" && !l.hard) ? '<span class="q">?</span>' : ""}</div>
+      <div class="lmeta">${meta || "срок не объявлен"}</div>
+    </button>
+    <div class="ldl" data-cycle="${l.id}" role="button">${d ? `<b class="${uu}">${fmt(d)}</b>` : `<b class="far">срок ?</b>`}${
+      st === "done" ? `<button class="mini" data-rework="${l.id}">развернули</button>`
+                    : `<span class="${uu}">${d ? leftText(daysLeft(d)) : "уточнить"}</span>`}</div>
+    ${picker && picker.id === l.id ? pickerHTML(l) : ""}
+    <div class="det" ${openIds.has(l.id) ? "" : "hidden"}>
+      ${l.repeat && (state.last || {})[l.id] ? `<p>Последний отмечен: ${fmt(parse(state.last[l.id]))}.</p>` : ""}
+      ${l.why ? `<p>Откуда срок: ${esc(l.why)}</p>` : ""}
+      ${(l.det || []).length ? `<ul>${l.det.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+      <div class="fields">
+        <label>Свой срок <input type="date" data-date="${l.id}" value="${state.date[l.id] || l.plan || ""}"></label>
+        <input type="text" placeholder="заметка" data-note="${l.id}" value="${esc(state.note[l.id] || "")}">
+        ${l.custom ? `<button class="btn ghost" data-del="${l.id}" data-subj="${s.id}">удалить</button>` : ""}
+      </div>
+    </div></div>`;
+}
+function pickerHTML(l){
+  const st = statusOf(l);
+  if (picker.mode === "call") return `<div class="pick"><span class="q2">Созвонились?</span>
+    <button data-call="${l.id}" class="on">да, отметить</button><button data-cancel="1">отмена</button></div>`;
+  if (picker.mode === "rework") return `<div class="pick"><span class="q2">Развернули на доработку?</span>
+    <button data-set="rework" class="warnbtn">да, вернули</button><button data-cancel="1">отмена</button></div>`;
+  return `<div class="pick"><span class="q2">Какой статус ставим?</span>
+    ${STATES.map(x => `<button data-set="${x}" class="${x === st ? "on" : ""}${x === "rework" ? " warnbtn" : ""}">${LABEL[x]}</button>`).join("")}
+    <button data-cancel="1">отмена</button></div>`;
+}
+function setMark(){
+  document.querySelectorAll("button.st").forEach(b => {
+    const l = findLab(b.dataset.open);
+    if (l.repeat){ b.textContent = "↻"; return; }
+    const st = state.status[b.dataset.open] || (l.status || "none");
+    b.textContent = MARK[st] || "";
+  });
+}
+
+/* ===== Экраны ===== */
+function viewSubjects(){
+  const rows = DATA.map(s => {
+    const all = labList(s);
+    const badge = s.badge ? ` <span class="badge">${esc(s.badge)}</span>` : "";
+    if (!all.length) return `<button class="srow off" data-subj="${s.id}">
+        <div><div class="sname">${esc(s.name)}${badge}</div>
+        <div class="smeta">${esc(s.teacher)}</div></div><div class="dots"></div><div class="chev">›</div></button>`;
+    const done = all.filter(l => statusOf(l) === "done").length;
+    const ready = all.filter(l => statusOf(l) === "ready").length;
+    const nearest = all.filter(l => statusOf(l) !== "done" && dateOf(l)).sort((a,b) => dateOf(a) - dateOf(b))[0];
+    const nd = nearest ? dateOf(nearest) : null;
+    const u = nearest ? urg(nearest) : "far";
+    const dots = all.map(l => {
+      const st = statusOf(l);
+      return `<i class="s-${st} u-${urg(l)}"></i>`;
+    }).join("");
+    const bits = [ `сдано ${done} из ${all.length}`, ready ? `готово ${ready}` : "",
+                   nd ? `ближайшее ${fmt(nd)}` : "" ].filter(Boolean).join(" · ");
+    return `<button class="srow" data-subj="${s.id}">
+      <div><div class="sname">${esc(s.name)}${badge}</div><div class="smeta ${nd && u === "hot" ? "hot" : ""}">${esc(s.teacher)} · ${bits}</div></div>
+      <div class="dots">${dots}</div><div class="chev">›</div></button>`;
+  }).join("");
+  return rulerHTML() + `<div class="subjects">${rows}</div>`;
+}
+
+function viewSubject(id){
+  const s = DATA.find(x => x.id === id);
+  if (!s) return viewSubjects();
+  const all = labList(s);
+  const done = all.filter(l => statusOf(l) === "done").length;
+  const cnt = all.length ? `сдано ${done} из ${all.length}` : (s.badge || "нет работ");
+  const body = !all.length
+    ? `<div class="lab"><div></div><div class="lmeta">Сдавать ничего не нужно.</div><div></div></div>`
+    : all.map(l => labRowHTML(s, l, false)).join("") +
+      `<div class="addrow"><input type="text" data-new="${s.id}" placeholder="добавить работу — например «ЛР2 · очередь задач»"><button class="btn pri" data-add="${s.id}">+</button></div>`;
+  return `<button class="back" data-back="1">← Все предметы</button>
+    <section class="subj">
+      <div class="shead">
+        <div class="t"><div class="sname">${esc(s.name)}${s.badge ? ` <span class="badge">${esc(s.badge)}</span>` : ""}</div><div class="scount">${cnt}</div></div>
+        <div class="smeta">${esc(s.teacher)}${s.meta ? " · " + esc(s.meta) : ""}</div>
+        ${s.send ? `<div class="ssend">${esc(s.send)}</div>` : ""}
+        ${s.note ? `<div class="ssend">${esc(s.note)}</div>` : ""}
+      </div>${body}</section>`;
+}
+
+function passes(l){
+  const st = statusOf(l), d = dateOf(l);
+  if (filter === "all") return true;
+  if (filter === "hot") return urg(l) === "hot";
+  return filter === st;
+}
+
+function viewDeadlines(){
+  const items = [];
+  DATA.forEach(s => labList(s).forEach(l => { if (passes(l)) items.push({ s, l, d: dateOf(l) }); }));
+  const dated = items.filter(i => i.d).sort((a,b) => a.d - b.d);
+  const undated = items.filter(i => !i.d);
+  let html = `<div class="chips" id="chips">
+    ${[["all","Всё"],["hot","Горит"],["none","Не выдано"],["todo","Не готова"],["ready","Готова"],["done","Сдана"],["rework","Доработка"]]
+      .map(([f,t]) => `<button class="chip" data-f="${f}" aria-pressed="${filter === f}">${t}</button>`).join("")}
+  </div>`;
+  if (!dated.length && !undated.length) return html + `<div class="empty">Ничего не подходит под фильтр.</div>`;
+  let month = null, open = false;
+  dated.forEach(i => {
+    const m = i.d.getFullYear() + "-" + i.d.getMonth();
+    if (m !== month){
+      if (open) html += "</section>";
+      month = m; open = true;
+      html += `<div class="mhead">${MONTHS_FULL[i.d.getMonth()]}</div><section class="subj">`;
+    }
+    html += labRowHTML(i.s, i.l, true);
+  });
+  if (open) html += "</section>";
+  if (undated.length){
+    html += `<div class="mhead">без срока</div><section class="subj">` + undated.map(i => labRowHTML(i.s, i.l, true)).join("") + `</section>`;
+  }
+  return rulerHTML() + html;
+}
+
+function findLab(id){ for (const s of DATA){ const l = labList(s).find(x => x.id === id); if (l) return l; } return {}; }
+function findSubjOf(id){ return DATA.find(s => labList(s).some(l => l.id === id)); }
+
+function widgetHTML(){
+  const items = [];
+  DATA.forEach(s => labList(s).forEach(l => {
+    const st = statusOf(l); if (st === "done") return;
+    const d = dateOf(l); if (d) items.push({ s, l, d });
+  }));
+  items.sort((a,b) => a.d - b.d);
+  return `<div class="wcard">
+    <div class="whead"><span>Ближайшее</span><span>${CUR_WEEK} неделя</span></div>
+    ${items.slice(0,3).map(i => { const u = urg(i.l); return `<div class="wrow">
+      <b class="${u}">${fmt(i.d)}</b><span>${esc(i.s.short)} · ${esc(i.l.n)}</span>
+      <i class="${u}">${leftText(daysLeft(i.d))}</i></div>`; }).join("")}
+    <a class="wopen" data-full="1">весь трекер →</a></div>`;
+}
+
+const dstamp = x => `${x.getFullYear()}${String(x.getMonth()+1).padStart(2,"0")}${String(x.getDate()).padStart(2,"0")}`;
+const icsEsc = t => String(t).replace(/[\\;,]/g, m => "\\" + m).replace(/\s*\n\s*/g, " ");
+function calItems(){
+  const out = [];
+  DATA.forEach(s => labList(s).forEach(l => {
+    const st = statusOf(l), d = dateOf(l);
+    if (!d || st === "done") return;
+    out.push({ s, l, d, title: `${s.short} · ${l.n}${l.title && !l.title.startsWith("—") ? " " + l.title : ""}` });
+  }));
+  return out.sort((a,b) => a.d - b.d);
+}
+function icsText(){
+  const L = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//LR tracker//RU","CALSCALE:GREGORIAN","X-WR-CALNAME:Дедлайны ЛР"];
+  calItems().forEach(i => {
+    L.push("BEGIN:VEVENT", `UID:lr-${i.l.id}@tracker.local`, `DTSTAMP:${dstamp(today)}T090000Z`,
+      `DTSTART;VALUE=DATE:${dstamp(i.d)}`, `DTEND;VALUE=DATE:${dstamp(new Date(i.d.getTime() + DAY))}`,
+      "SUMMARY:" + icsEsc(i.title),
+      "DESCRIPTION:" + icsEsc(i.l.why || ""),
+      "BEGIN:VALARM","TRIGGER:-PT15H","ACTION:DISPLAY","DESCRIPTION:" + icsEsc(i.title),"END:VALARM","END:VEVENT");
+  });
+  L.push("END:VCALENDAR");
+  return L.join("\r\n") + "\r\n";
+}
+function downloadICS(){
+  try{
+    const url = URL.createObjectURL(new Blob([icsText()], { type:"text/calendar;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = "deadlines.ics";
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
+  }catch(e){ alert("Не получилось скачать отсюда — открой страницу в отдельной вкладке браузера."); }
+}
+function gcalURL(i){
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(i.title)
+    + "&dates=" + dstamp(i.d) + "/" + dstamp(new Date(i.d.getTime() + DAY))
+    + "&details=" + encodeURIComponent(i.l.why || "");
+}
+function viewCal(){
+  const items = calItems();
+  return `<button class="back" data-backcal="1">← назад</button>
+  <section class="subj">
+    <div class="shead">
+      <div class="t"><div class="sname">Календарь телефона</div><div class="scount">${items.length} дат</div></div>
+      <div class="smeta">Виджет 2×2 на рабочем столе умеет только календарь — значит, даты должны лежать в нём.</div>
+      <div class="ssend">Внутри приложения Claude скачивание файлов заблокировано, поэтому основной способ — «+ в календарь» у каждой строки: откроется Google Календарь с заполненными полями, останется нажать «Сохранить». Кнопки со скачиванием сработают, только если открыть эту страницу в браузере.</div>
+    </div>
+    <div class="addrow"><button class="btn pri" data-ics="1">Скачать все даты файлом .ics</button></div>
+    ${items.map(i => `<div class="lab">
+      <div class="ldl" style="text-align:left"><b class="${urg(i.l)}">${fmt(i.d)}</b></div>
+      <div class="lmain"><div class="lname">${esc(i.title)}</div></div>
+      <a class="mini" href="${gcalURL(i)}" target="_blank" rel="noopener">+ в календарь</a>
+    </div>`).join("")}
+    <div class="addrow" style="display:block;color:var(--ink-3);font-size:12px">
+      Чтобы вынести трекер на главный экран: войди в Chrome на claude.ai под своим аккаунтом, открой там этот трекер и выбери «Добавить на главный экран». Войти нужно один раз, дальше ярлык открывается сразу.
+    </div>
+  </section>`;
+}
+
+function paint(){
+  if (widgetMode){ document.getElementById("app").innerHTML = widgetHTML(); return; }
+  document.getElementById("app").innerHTML =
+    openSubject ? viewSubject(openSubject)
+    : tab === "subjects" ? viewSubjects()
+    : tab === "cal" ? viewCal()
+    : viewDeadlines();
+  [...document.getElementById("tabs").children].forEach(b => b.setAttribute("aria-pressed", String(!openSubject && b.dataset.tab === tab)));
+  const cb = document.getElementById("calbtn"); if (cb) cb.classList.toggle("on", tab === "cal" && !openSubject);
+  setMark();
+}
+
+/* ===== События ===== */
+/* ===== Системная кнопка/жест «назад» =====
+   В истории держим максимум ОДНУ свою запись: пока открыт уровень (предмет,
+   календарь или выбор статуса) — она есть, на корневом экране её нет.
+   Поэтому лишние записи не копятся, сколько бы ты ни прыгал по вкладкам. */
+let hDepth = 0, selfPop = false;
+const isDeep = () => !!(openSubject || picker || tab === "cal");
+function syncDepth(){
+  const want = isDeep() ? 1 : 0;
+  if (want === 1 && hDepth === 0){ try { history.pushState({ lr:1 }, ""); hDepth = 1; } catch(e){} }
+  else if (want === 0 && hDepth === 1){
+    hDepth = 0; selfPop = true;
+    setTimeout(() => { selfPop = false; }, 500);   // страховка, если popstate не придёт
+    try { history.back(); } catch(e){ selfPop = false; }
+  }
+}
+window.addEventListener("popstate", () => {
+  if (selfPop){ selfPop = false; return; }      // это мы сами свернули уровень
+  hDepth = 0;
+  if (picker) picker = null;
+  else if (openSubject) openSubject = null;
+  else if (tab === "cal") tab = prevTab;
+  else return;                                   // корень — страница закрывается
+  window.scrollTo(0,0); syncDepth(); paint();
+});
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-backcal],[data-ics],[data-zoom],[data-w],[data-full],[data-tab],[data-subj],[data-back],[data-cycle],[data-open],[data-add],[data-del],[data-f],[data-set],[data-cancel],[data-call],[data-rework]");
+  if (!t) return;
+  const d = t.dataset;
+  if (d.zoom){
+    zoom = Math.min(1.6, Math.max(0.8, Math.round((zoom + 0.1 * Number(d.zoom)) * 10) / 10));
+    try { localStorage.setItem("lr-zoom", zoom); } catch(e){}
+    applyZoom(); return;
+  }
+  if (d.ics){ downloadICS(); return; }
+  if (d.w){ setWidget(true); return; }
+  if (d.full){ setWidget(false); return; }
+  if (d.tab){
+    if (d.tab === tab && !openSubject) return;
+    if (d.tab === "cal" && tab !== "cal" && !openSubject) prevTab = tab;
+    tab = d.tab; openSubject = null; picker = null; window.scrollTo(0,0); syncDepth(); paint(); return;
+  }
+  if (d.backcal){ tab = prevTab; picker = null; window.scrollTo(0,0); syncDepth(); paint(); return; }
+  if (d.back){ openSubject = null; picker = null; window.scrollTo(0,0); syncDepth(); paint(); return; }
+  if (d.subj && !d.del){ openSubject = d.subj; picker = null; window.scrollTo(0,0); syncDepth(); paint(); return; }
+  if (d.f){ filter = d.f; picker = null; syncDepth(); paint(); return; }
+  if (d.cycle){                                      // тап по строке открывает выбор статуса
+    const lab = findLab(d.cycle);
+    picker = (picker && picker.id === d.cycle) ? null : { id:d.cycle, mode: lab.repeat ? "call" : "states" };
+    syncDepth(); paint(); return;
+  }
+  if (d.rework){ picker = { id:d.rework, mode:"rework" }; syncDepth(); paint(); return; }
+  if (d.cancel){ picker = null; syncDepth(); paint(); return; }
+  if (d.set){
+    state.status[picker.id] = d.set;
+    picker = null; save(); syncDepth(); paint(); return;
+  }
+  if (d.call){
+    const lab = findLab(d.call);
+    state.last = state.last || {}; state.last[d.call] = iso(today);
+    state.count[d.call] = (state.count[d.call] || 0) + 1;
+    state.date[d.call] = iso(new Date(today.getTime() + lab.repeat * DAY));
+    picker = null; save(); syncDepth(); paint(); return;
+  }
+  if (d.open){ openIds.has(d.open) ? openIds.delete(d.open) : openIds.add(d.open); paint(); return; }
+  if (d.add){
+    const field = document.querySelector(`[data-new="${d.add}"]`);
+    const name = field && field.value.trim();
+    if (!name){ if (field) field.focus(); return; }
+    const id = d.add + "_x" + Date.now();
+    (state.extra[d.add] = state.extra[d.add] || []).push({ id, n:name, title:"", plan:"", sure:false, status:"todo", custom:true, why:"добавлено вручную" });
+    save(); paint(); return;
+  }
+  if (d.del){
+    const sid = d.subj, id = d.del;
+    state.extra[sid] = (state.extra[sid] || []).filter(x => x.id !== id);
+    delete state.status[id]; delete state.date[id]; delete state.note[id]; delete state.count[id];
+    save(); paint(); return;
+  }
+});
+document.addEventListener("change", e => { if (e.target.dataset.date){ state.date[e.target.dataset.date] = e.target.value; save(); paint(); } });
+document.addEventListener("input", e => { if (e.target.dataset.note){ state.note[e.target.dataset.note] = e.target.value; save(); } });
+
+/* ===== Старт ===== */
+loadLocal();
+applyZoom();
+document.body.classList.toggle("w", widgetMode);
+setTimeout(netNote, 0);
+paint();
+const footText = local => "Тап по строке — выбор статуса, тап по кружку — подробности. У сданной работы рядом есть «развернули», если препод вернул на доработку." +
+  (local ? " Сохраняется в этом браузере." : " Статусы сохраняются и подтягиваются на любом устройстве.") +
+  ` <button class="btn" data-w="1" style="margin-top:8px">режим виджета</button>`;
+document.getElementById("foot").innerHTML = footText(true);
+
+(async () => {
+  try{
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    const db = await window.claude.use("db");
+    if (!db) return;
+    dbDoc = db.doc("state/tracker");
+    const snap = await dbDoc.get();
+    if (snap.exists){
+      const v = snap.data() || {};
+      const remote = Object.assign({}, v.status || {});
+      if (v.v !== 2) Object.keys(remote).forEach(k => { if (remote[k] === "done") remote[k] = "ready"; });
+      state = { status:Object.assign({}, state.status, remote), date:Object.assign({}, state.date, v.date||{}),
+                note:Object.assign({}, state.note, v.note||{}), extra:Object.assign({}, state.extra, v.extra||{}),
+                last:Object.assign({}, state.last, v.last||{}), count:Object.assign({}, state.count, v.count||{}), v:2 };
+      saveLocal(); paint();
+    } else if (Object.keys(state.status).length) save();
+    document.getElementById("foot").innerHTML = footText(false);
+  }catch(e){}
+})();
+
+/* ===== офлайн-режим на хостинге (GitHub Pages) ===== */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
+</script>
+</body>
+</html>
